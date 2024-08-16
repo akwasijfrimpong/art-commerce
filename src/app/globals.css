@@ -23,3 +23,23 @@ body {
     text-wrap: balance;
   }
 }
+
+.grid-item {
+  width: 100%;
+  object-fit: cover; /* Ensures images cover their space */
+}
+
+.grid-item.long {
+  grid-row: span 4;
+}
+
+.grid-item.short {
+  grid-row: span 1;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-column: 4;
+  gap: 150px;
+  grid-auto-rows: auto; /* Automatically adjust row height */
+}
