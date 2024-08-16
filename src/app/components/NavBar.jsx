@@ -2,7 +2,13 @@ import Image from "next/image";
 export default function NavBar() {
   return (
     <div className="h-[60px] sticky top-0 w-[100%] bg-white z-30 flex gap-10 items-center">
-      <Image src="/logo.svg" alt="logo" width={50} height={50} className="" />
+      <Image
+        src="/logo.svg"
+        alt="logo"
+        width={50}
+        height={50}
+        className="ml-2"
+      />
       <div>
         <button className="h-[60px] w-[120px] border-[1px] font-bold">
           {" "}
