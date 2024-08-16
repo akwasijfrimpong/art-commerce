@@ -3,7 +3,7 @@ import styles from "./ProductCard.module.css";
 
 import { useEffect } from "react";
 
-export default function ProductCard({ popularVids }) {
+export default function ProductCard({ popularVids, handleClickedImage }) {
   const tableOne = popularVids.slice(0, 3);
   const tableTwo = popularVids.slice(3, 8);
   const tableThree = popularVids.slice(8, 12);
@@ -22,6 +22,9 @@ export default function ProductCard({ popularVids }) {
               alt="vid"
               className="flex flex-col w-[320px] rounded"
               key={vid.id}
+              onClick={() => {
+                handleClickedImage(vid.id);
+              }}
             />
           );
         })}

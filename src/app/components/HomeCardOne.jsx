@@ -1,11 +1,21 @@
 "use client";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
+import ProductCardPopUp from "./ProductCardPopUp.jsx";
 
 const HomeCardOne = () => {
   const [listOfVidImages, setListOfVidImages] = useState([]);
   const [listOfImages, setListOfImages] = useState([]);
   const [showVid, setShowVid] = useState(true);
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupImage, setPopupImage] = useState("");
+  function handleClickedImage(id) {
+    setOpenPopup(true);
+    console.log("clicked photo", id);
+  }
+  const searchContentId = ()=>{
+    fetch
+  }
 
   useEffect(() => {
     const fetchPopularVideos = async () => {
@@ -65,9 +75,9 @@ const HomeCardOne = () => {
   }, []);
 
   return (
-    <div className="max-h-[900px] w-screen pt-6 bg-white overflow-hidden">
+    <div className="max-h-[900px] w-screen pt-6 bg-white overflow-hidden relative">
       <div className="flex justify-center gap-6 flex-col items-center">
-        <h1 className="font-bold text-[32px]">Explore</h1>
+        <h1 className="font-bold text-[32px]">Popular</h1>
         <div className="flex gap-7">
           <button
             className={`${
@@ -94,8 +104,16 @@ const HomeCardOne = () => {
             Popular Photos
           </button>
         </div>
-        {showVid && <ProductCard popularVids={listOfVidImages} />}
+        {showVid && (
+          <ProductCard
+            popularVids={listOfVidImages}
+            handleClickedImage={handleClickedImage}
+          />
+        )}
         {!showVid && <ProductCard popularVids={listOfImages} />}
+        <div>
+          <ProductCardPopUp content={popupImage} />
+        </div>
       </div>
     </div>
   );
