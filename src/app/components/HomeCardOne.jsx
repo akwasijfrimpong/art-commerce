@@ -9,12 +9,26 @@ const HomeCardOne = () => {
   const [showVid, setShowVid] = useState(true);
   const [openPopup, setOpenPopup] = useState(false);
   const [popupImage, setPopupImage] = useState("");
+
   function handleClickedImage(id) {
     setOpenPopup(true);
     console.log("clicked photo", id);
-  }
-  const searchContentId = ()=>{
-    fetch
+
+    const searchContentId = async (id) => {
+      const getContent = await fetch("https://api.pexels.com/v1/photos/" + id, {
+        headers: {
+          Authorization:
+            "ZFec6hZe2wRdP4WN2uHMPwezn5ExJYxpxPieXBqFxumxTRYInrQ4YhkY",
+        },
+      });
+      if (!getContent.ok) {
+        throw new Error("Error fetching content");
+      }
+      const data = await getContent.json();
+      console.log("getContent", data);
+      setPopupImage(data.src.original);
+    };
+    searchContentId(id);
   }
 
   useEffect(() => {
@@ -104,16 +118,24 @@ const HomeCardOne = () => {
             Popular Photos
           </button>
         </div>
+
+        {openPopup && (
+          <div>
+            <ProductCardPopUp content={popupImage} />
+          </div>
+        )}
         {showVid && (
           <ProductCard
             popularVids={listOfVidImages}
             handleClickedImage={handleClickedImage}
           />
         )}
-        {!showVid && <ProductCard popularVids={listOfImages} />}
-        <div>
-          <ProductCardPopUp content={popupImage} />
-        </div>
+        {!showVid && (
+          <ProductCard
+            popularVids={listOfImages}
+            handleClickedImage={handleClickedImage}
+          />
+        )}
       </div>
     </div>
   );
