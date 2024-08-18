@@ -89,7 +89,13 @@ const HomeCardOne = () => {
   }, []);
 
   return (
-    <div className="max-h-[900px] w-screen pt-6 bg-white overflow-hidden relative">
+    <div
+      className={`${
+        openPopup
+          ? "max-h-[900px] w-screen pt-6 bg-white relative"
+          : "max-h-[900px] w-screen pt-6 bg-white overflow-hidden relative"
+      }`}
+    >
       <div className="flex justify-center gap-6 flex-col items-center">
         <h1 className="font-bold text-[32px]">Popular</h1>
         <div className="flex gap-7">
@@ -121,7 +127,12 @@ const HomeCardOne = () => {
 
         {openPopup && (
           <div>
-            <ProductCardPopUp content={popupImage} />
+            <ProductCardPopUp
+              content={popupImage}
+              handleClosingPopup={() => {
+                setOpenPopup(false);
+              }}
+            />
           </div>
         )}
         {showVid && (
