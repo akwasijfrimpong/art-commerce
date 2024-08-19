@@ -26,7 +26,7 @@ export default function ProductCardPopUp({ content, handleClosingPopup }) {
         <div className="flex pt-6 w-[100%] pb-5 gap-10 justify-center">
           <p className="font-bold text-[24px]">Title of Art</p>
         </div>
-        <img
+        {/* <iframe
           src={displayedContent}
           alt="vid"
           height={500}
@@ -34,7 +34,11 @@ export default function ProductCardPopUp({ content, handleClosingPopup }) {
           onClick={() => {
             console.log(displayedContent);
           }}
-        />
+        /> */}
+        <video width="100%" height="auto" controls loop autoPlay muted>
+          <source src={displayedContent} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <p className="pt-2">Art by : Steve</p>
         <div className="flex gap-10 pt-5">
           <button className="font-bold text-white bg-blue-900 w-[150px] h-[40px] rounded-xl">

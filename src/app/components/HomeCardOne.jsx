@@ -10,25 +10,51 @@ const HomeCardOne = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [popupImage, setPopupImage] = useState("");
 
-  function handleClickedImage(id) {
+  function handleClickedImage(id, type) {
     setOpenPopup(true);
-    console.log("clicked photo", id);
-
-    const searchContentId = async (id) => {
-      const getContent = await fetch("https://api.pexels.com/v1/photos/" + id, {
-        headers: {
-          Authorization:
-            "ZFec6hZe2wRdP4WN2uHMPwezn5ExJYxpxPieXBqFxumxTRYInrQ4YhkY",
-        },
-      });
-      if (!getContent.ok) {
-        throw new Error("Error fetching content");
-      }
-      const data = await getContent.json();
-      console.log("getContent", data);
-      setPopupImage(data.src.original);
-    };
-    searchContentId(id);
+    console.log("clicked photo", id, type);
+    if (type === "image") {
+      const searchContentId = async (id) => {
+        const getContent = await fetch(
+          "https://api.pexels.com/v1/photos/" + id,
+          {
+            headers: {
+              Authorization:
+                "ZFec6hZe2wRdP4WN2uHMPwezn5ExJYxpxPieXBqFxumxTRYInrQ4YhkY",
+            },
+          }
+        );
+        if (!getContent.ok) {
+          throw new Error("Error fetching content");
+        }
+        const data = await getContent.json();
+        console.log("getContent", data);
+        setPopupImage(data.src.original);
+      };
+      searchContentId(id);
+    }
+    if (type == "video") {
+      const searchContentId = async (id) => {
+        const getContent = await fetch(
+          "https://api.pexels.com/videos/videos/" + id,
+          {
+            headers: {
+              Authorization:
+                "ZFec6hZe2wRdP4WN2uHMPwezn5ExJYxpxPieXBqFxumxTRYInrQ4YhkY",
+            },
+          }
+        );
+        if (!getContent.ok) {
+          throw new Error("Error fetching content");
+        }
+        const data = await getContent.json();
+        console.log("getContent", data);
+        const videoLink = data.video_files[1].link;
+        console.log(videoLink, "videoLink");
+        setPopupImage(videoLink);
+      };
+      searchContentId(id);
+    }
   }
 
   useEffect(() => {
@@ -139,12 +165,14 @@ const HomeCardOne = () => {
           <ProductCard
             popularVids={listOfVidImages}
             handleClickedImage={handleClickedImage}
+            type={"video"}
           />
         )}
         {!showVid && (
           <ProductCard
             popularVids={listOfImages}
             handleClickedImage={handleClickedImage}
+            type={"image"}
           />
         )}
       </div>

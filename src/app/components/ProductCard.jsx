@@ -3,7 +3,7 @@ import styles from "./ProductCard.module.css";
 
 import { useEffect } from "react";
 
-export default function ProductCard({ popularVids, handleClickedImage }) {
+export default function ProductCard({ popularVids, handleClickedImage, type }) {
   const tableOne = popularVids.slice(0, 3);
   const tableTwo = popularVids.slice(3, 8);
   const tableThree = popularVids.slice(8, 12);
@@ -23,7 +23,7 @@ export default function ProductCard({ popularVids, handleClickedImage }) {
               className="flex flex-col w-[320px] rounded"
               key={vid.id}
               onClick={() => {
-                handleClickedImage(vid.id);
+                handleClickedImage(vid.id, type);
               }}
             />
           );
@@ -37,6 +37,9 @@ export default function ProductCard({ popularVids, handleClickedImage }) {
               alt="vid"
               className="flex flex-col w-[320px] rounded"
               key={vid.id}
+              onClick={() => {
+                handleClickedImage(vid.id, type);
+              }}
             />
           );
         })}
@@ -49,6 +52,9 @@ export default function ProductCard({ popularVids, handleClickedImage }) {
               alt="vid"
               className="flex flex-col w-[320px] rounded"
               key={vid.id}
+              onClick={() => {
+                handleClickedImage(vid.id, type);
+              }}
             />
           );
         })}
@@ -61,6 +67,9 @@ export default function ProductCard({ popularVids, handleClickedImage }) {
               alt="vid"
               className="flex flex-col w-[320px] rounded"
               key={vid.id}
+              onClick={() => {
+                handleClickedImage(vid.id, type);
+              }}
             />
           );
         })}
